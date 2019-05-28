@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://raphael95.github.io/output</id>
     <title>blog</title>
-    <updated>2019-05-28T11:29:15.867Z</updated>
+    <updated>2019-05-28T11:38:41.745Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://raphael95.github.io/output"/>
     <link rel="self" href="https://raphael95.github.io/output/atom.xml"/>
@@ -16,7 +16,9 @@
         <link href="https://raphael95.github.io/output/post/sort-algorithms">
         </link>
         <updated>2019-05-27T15:03:27.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="introduction">Introduction</h2>
+        <content type="html"><![CDATA[<p>📒📝📓 record seven sort algorithms
+they are: bubble sort 、selection sort、insertion sort、quick sort 、heap sort、merge sort、counting sort</p>
+<h2 id="introduction">Introduction</h2>
 <p>Some algorithms(<strong><a href="#selection">selection</a>, <a href="#bubble">bubble</a>, <a href="#heap">heap</a></strong>) work by moving elements to their final position, one at a time. You sort an array of size N, put 1 item in place and continue sorting and array of size N -1,</p>
 <p>Some algorithms(<strong><a href="#insertion">insertion</a>, <a href="#quicksort">quicksort</a>, <a href="#counting">counting</a></strong>)put items to temporary place, closer to their final position, moving them closer to final position ,in each iteration.</p>
 <p>Some algorithms(<strong><a href="#merge">merge</a></strong>) start with a 'sorted list ' of one element, and merge unsorted items into it, one at a time</p>
