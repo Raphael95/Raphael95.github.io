@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Search  Algorithms | blog</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://raphael95.github.io/output/favicon.ico?v=1559211132971">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://raphael95.github.io/output/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://raphael95.github.io/output">
+        <img src="https://raphael95.github.io/output/images/avatar.png?v=1559211132971" class="site-logo">
+        <h1 class="site-title">blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/output" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/output/archives" class="site-nav">
+            笔记
+          </a>
+        
+      
+        
+          <a href="/output/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/output/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raphael95.github.io/output/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Search  Algorithms</h2>
+            <div class="post-date">2019-05-30</div>
+            
+            <div class="post-content">
+              <p>📝📓 record search algorithms</p>
+<p>they are: linear search、binary search、linear selection、Top K problem</p>
+<!-- more -->
+<h2 id="introduction"><strong>Introduction</strong></h2>
+<p>Searching Algorithms are designed to check for an element or retrieve an element from any dta structure where it is stored. Based on the type of search operation, thesealgorithms are generally classified into two categories:</p>
+<ol>
+<li>Sequential Search: In this, the list or array is traversed sequentially and every element is checked. For example: Linear Search</li>
+<li>Interval Search: These algorithms are specifically designed for searching in sorted data-structures. These type of searching algorithms are much more efficient than Linear Search as they repeatedly target the center of the search structure and divide the search space in half. For example: Binary Search.</li>
+</ol>
+<h2 id="linear-search"><strong>Linear Search</strong></h2>
+<blockquote>
+<p>time complexity: O(N)</p>
+</blockquote>
+<p>Linear search is uesed on a collections of items, it relies on the technique of traversing a list from start to end by exploring properties of all the elements that are found on the way.</p>
+<p>For example, consider an array of integers of size N, you should find and print the position of all the elements with value X. Here, the linear search is based on the idea of matching each element from the begaining of the list to the end of the list with the integer X, and then printing the position of element if the condition is 'True'.</p>
+<p>pseudocode in C:</p>
+<pre><code>void find(int *a, int len){
+	for(int i = 0; i &lt; len; i ++){
+		if(a[i] == '5')
+			print(&quot;%d \n&quot;, i);
+	}
+}
+</code></pre>
+<h2 id="binary-search"><strong>Binary Search</strong></h2>
+<blockquote>
+<p>time complexity: O(lgN)</p>
+</blockquote>
+<p>Binary search works only on a sorted set of elements. To use binary search on a collection, the collection must first be sorted.</p>
+<p>When binary search is used to perform operations on a sorted set, the number of iterations can always be reduced on the basis of the value that is being searched.</p>
+<p>pseudocode in C:</p>
+<pre><code>int bin_search(int *a, int low, int high, const int x){
+	int index = -1;
+	int mid;
+	if(low &lt;= high){
+		mid = (low + high) / 2;
+		if(a[mid] == x)
+			return mid;
+		if(a[mid] &lt; x)
+			index = bin_search(a, mid + 1, high, x);
+		else
+			index = bin_search(a, low, mid - 1, x);
+	}
+	return index;
+}
+</code></pre>
+<h2 id="linear-selection"><strong>Linear Selection</strong></h2>
+<blockquote>
+<p>time complexity: O(N)</p>
+</blockquote>
+<p>Now, we need to <strong><font color=red>find the k-th minimum/maximum item in an unsorted array,</font></strong> as we know, the selection problem can be solved in O(N * lgN) time, since we can sort the array using heap sort or merge sort and then simply index the k-th element in the output array. There are faster algorithms that the work can be done in expected linear time.</p>
+<p>As in QuickSort algorithms, the idea is to partition the input array recursively. But unlike quicksort, which recursively process both sides of the partition, in linear selection, it only works on one side of the partition. This different shows up in the analysis: whereas quicksort has an expected running time of O(N * lg N), the expected time of linear selection is O(N).</p>
+<p>pseudocode in C:</p>
+<pre><code>int linear_selection(int *a, int low, int high, const in k){
+	int count = 0;
+	if(low == high)
+		return a[low];
+	int pivot = partition(a, low, high);
+	count = oivot - low + 1;
+	if(count &gt;= k)
+		return linear_selection(a, low, count, k);
+	else
+		return linear_selection(a, count + 1, high, k - count);
+</code></pre>
+<h2 id="top-k-selection-problem"><strong>Top K Selection problem</strong></h2>
+<p>Similar with linear selction problem, now, we need to <strong><font color=red>find the top k elements in an unsorted array,</font></strong> of course, you can write down such code as below:</p>
+<pre><code>results = sorted(array, reverse=True)[: 10]
+</code></pre>
+<p>Anything involving a sort will usually take O(N * lgN) time, which will keep you waiting around for several seconds or even minutes when dealing with lots of items. An O(N * lgN) algorithm, for large N, simply cannot be run in realtime when users are waiting.</p>
+<p>There are two ways to resolve the problem:</p>
+<h3 id="1-solution-1-using-heap">1. solution 1: using heap</h3>
+<blockquote>
+<p>time complexity: O(N * lgK), space complecity: O(K)</p>
+</blockquote>
+<p>Luckily, finding the top k items can be done in O(N * lgK) time, which is much, much faster than O(N * lgN), using a heap, which is actually a priority queue. Assuming that we need to select top k maximum items in a list, as in heap sort, First, accordingly, we should build a minimum heap of size K to store the target items, and the top is always minimum item in the heap. Second, adding the rest of items in array recursively to heap if it is larger than top  element in the heap, Third, adjusting the heap and always place the minimum item to the top in the heap.</p>
+<p>pseudocode in C:</p>
+<pre><code>void adjust_heap(int *a, int root, int len){
+	int left_child = 2 * root + 1;
+	int right_child = 2 * root + 2;
+	int max_child;
+	if(left_child &gt;=len)
+		return;
+	else{
+		if(right_child &gt;= len)
+			max_child = left_child;
+		else
+			max_child = a[left_child] &gt; a[right_child]? left_child: right_child;
+		if(a[root] &gt; a[max_child]){
+			int tmp = a[root];
+			a[root] = a[max_child];
+			a[max_child] = tmp;
+			adjust_heap(a, max_child, len);
+		}
+	}
+}
+
+void build_heap(int *a, int len){
+	for(int i = len / 2 - 1; i &gt;=0; i --)
+		adjust_heap(a, i, len);
+}
+
+void top_k(int *a, int len, const in k){
+	int heap[k], i;
+	for(i = 0; i &lt; k; i ++)
+		heap[i] = a[i];
+	build_heap(heap, k);
+	for(i = k; i &lt; len; i ++){
+		if(a[i] &gt; heap[0]){
+			heap[0] = a[i];
+			adjust(heap, 0, k); 
+		}
+	}
+	
+	// print the top k items;
+	for(i = 0; i &lt; k; i ++)
+		printf(&quot;%d &quot;, heap[i]);
+}
+
+</code></pre>
+<h3 id="2-solution-2-using-linear-selection">2. solution 2: using linear selection</h3>
+<blockquote>
+<p>time complexity: O(N), space complexity: O(N)</p>
+</blockquote>
+<p>as we can see, the linear selection are faster than heap, however, it needs more space and may not wok well when space is limited.</p>
+<p>we have learned about the linear selection algorithm in previous section, it uses partition function in QuickSort to get the pivot item and divide the array into two sublists, if the amount of left sublist equals to K, the left sublist will be the final Top K items, if amount is less than K, it will continue to find the rest (K - amount) items in right sublists, otherwise, it will continue to find the pivot that equals to K in left sublists.</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://raphael95.github.io/output/post/sort-algorithms">
+                  <h3 class="post-title">
+                    Sorting  Algorithms
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'd428067266924907dc0b',
+        clientSecret: '0f925e73ae19595836304e7a7029fefa70e5222e',
+        repo: 'Raphael95.github.io',
+        owner: 'Raphael95',
+        admin: ['Raphael95'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
