@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Binary  Tree  and  Traversal | blog</title>
+<meta name="description" content="温故而知新">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://raphael95.github.io/output/favicon.ico?v=1559629217621">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://raphael95.github.io/output/styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://raphael95.github.io/output">
+        <img src="https://raphael95.github.io/output/images/avatar.png?v=1559629217621" class="site-logo">
+        <h1 class="site-title">blog</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/output" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/output/archives" class="site-nav">
+            笔记
+          </a>
+        
+      
+        
+          <a href="/output/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/output/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://raphael95.github.io/output/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Binary  Tree  and  Traversal</h2>
+            <div class="post-date">2019-05-31</div>
+            
+            <div class="post-content">
+              <p>📝📓 record binary tree and trevsersal</p>
+<!-- more -->
+<h2 id="introduction"><strong>Introduction</strong></h2>
+<p>Tree represents the nodes connected by edges. We will discuss binary tree or binary search tree specifically.</p>
+<p>Binary Tree is a special data structure used for data storage purpose. A binary tree has s a special condition that each node can have a maximum of two children. A binary tree has the benefits of both an ordered arrat and a linked list as search is is as quick as in a sorted array and insertion or deletion operation are as fast as in linked list.</p>
+<p>We first define a tree struct as follows:</p>
+<pre><code>struct Node{
+	int data;
+	struct Node * left_child;
+	struct Node * right_child;
+};
+
+struct Tree{
+	struct Node * root;
+};
+</code></pre>
+<p><img src="https://www.tutorialspoint.com/data_structures_algorithms/images/binary_tree.jpg" alt="binary_tree"></p>
+<h3 id="1-build-a-binary-treerecursion">1. build a binary tree(recursion)</h3>
+<p>Creating a binary tree can be implemented by insertion operation, also, two conditions can be followed as: building a normal binary tree or building a binary search tree, and we only talk about normal binary tree. When constructing a normal binary tree, we need a principle that can locate the position node to be inserted, here, we usually use Pre-Order traversal to complete the insertion operation.</p>
+<p>pseudocode in C:</p>
+<pre><code>struct Node * construct_tree(struct Node * node){
+	int data;
+	printf(&quot;please input the data: &quot;);
+	scanf(&quot;%d&quot;, &amp;data);
+	if(data == -1)
+		return NULL;
+	else{
+		node = (struct Node *)malloc(sizeof(struct Node));
+		node-&gt;data = data;
+		node-&gt;left_child = construct_tree(node-&gt;left_child);
+		node-&gt;right_child = construct_tree(node-&gt;right_child);
+	}
+	return node;
+
+void construct(struct Tree * t){
+	t-&gt;root = construct_tree(t-&gt;root);
+}
+</code></pre>
+<h3 id="2-pre-order-traversalrecursion">2. Pre-Order traversal(recursion)</h3>
+<p>traverse the root node of a binary tree first, then left child node and right child node at last.</p>
+<p>pseudocode in C:</p>
+<pre><code>void pre(struct Node * node){
+	if(node != NULL){
+		printf(&quot;%d &quot;, node-&gt;data);
+		pre(node-&gt;left_child);
+		pre(node-&gt;right_child);
+	}
+}
+
+void pre_order(struct Tree *){
+	pre(t-&gt;root);
+}
+</code></pre>
+<h3 id="3-in-order-traversalrecursion">3. In-Order traversal(recursion)</h3>
+<p>traverse the left child node of a binary tree first, then root node and right child node at last.</p>
+<p>pseudocode in C：</p>
+<pre><code>void in(struct Node * node){
+	if(node != NULL){
+		in(node-&gt;left_child);
+		printf(&quot;%d &quot;, node-&gt;data);
+		in(node-&gt;right_child);
+	}
+}
+
+void in_order(struct Tree * t){
+	in(t-&gt;root);
+}
+</code></pre>
+<h3 id="4-post_order-traversalrecursion">4. Post_Order traversal(recursion)</h3>
+<p>traverse the left child node of a binary tree first, then right child node and root node at last.</p>
+<p>pseudocode in C:</p>
+<pre><code>void post(struct Node * node){
+	i(node != NULL){
+		post(node-&gt;left_child);
+		post(node-&gt;right_child);
+		printf(&quot;%d &quot;, node-&gt;data);
+	}
+}
+
+void post_order(struct Tree * t){
+	post(t-&gt;root);
+}
+</code></pre>
+<h3 id="5-level-traversalusing-queue">5. level traversal(using Queue)</h3>
+<p>traverse a binary tree level by level, we can store the nodes those have benn visited with the help of Queue structure. In able to implement the queue efficiently, we use Circle Queue</p>
+<p>first, define a Queue, code in C:</p>
+<pre><code>#define MAX_QUEUE 20
+struct Queue{
+	struct Node **base;
+	int front;
+	int rear;
+};
+
+bool isEmpty(struct Queue * q){
+	if(q-&gt;front == q-&gt;rear)
+		return true;
+	else
+		return false;
+}
+
+bool isFull(struct Queue * q){
+	if((q-&gt;rear + 1) / MAX_QUEUE == q-&gt;front)		return true;
+	else
+		return false;
+}	
+
+void enqueue(struct Queue * q, struct Node * node){
+	if(isFull(q))
+		return;
+	else{
+		if(isEmpty(q))
+			q-&gt;base[q-&gt;rear] = node;
+		else{
+			q-&gt;rear = (q-&gt;rear + 1) / MAX_QUEUE;
+			q-&gt;base[q-&gt;rear] = node;
+		}
+	}
+}
+
+struct Node * dequeue(struct Queue * q){
+	if(!isEmpty(q)){
+		struct Node * tmp = q-&gt;base[q-&gt;front];
+		q-&gt;front = (q-&gt;front + 1) / MAX_QUEUE;
+		return tmp;
+	}
+	else
+		exit(-1);
+}
+		
+</code></pre>
+<p>next, we can implement the level traversal</p>
+<pre><code>void level_traverse(struct Tree * t){
+	struct Queue * q = (struct Queue *)malloc(siezof(struct Queue));
+	q-&gt;base = (struct Node **)malloc(sizeof(struct Node *));
+	q-&gt;front = 0;
+	q-&gt;rear = 0;
+	enqueue(q, t-&gt;root);
+	struct Node * tmp;
+	while(!isEmpty(q)){
+		tmp = dequeue(q);
+		printf(&quot;%d &quot;, tmp-&gt;data);
+		if(tmp-&gt;left_child)
+		
+			enqueue(q, tmp-&gt;left_child);
+		if(tmp-&gt;right_child)
+			enqueue(q, tmp-&gt;right_child);
+	}
+}
+</code></pre>
+<h2 id="non-recursion-traversalusing-stack"><strong>Non-recursion traversal(using Stack)</strong></h2>
+<h3 id="1-pre-order-traversal">1. Pre-Order traversal</h3>
+<p>the procedure of algorithms:</p>
+<ol>
+<li>push the root node to stack;</li>
+<li>if the stack is not empty, pop the top element of stack;</br>
+(1) push it's right child node to stack if exists;</br>
+(2) push it's left child node to stack if exists;</br></li>
+<li>repeat step 2 until stack is empty</li>
+</ol>
+<p>pseudocode in C:</p>
+<pre><code>void pre_order(struct Tree * tree){
+	struct Stack * stack = (struct Stack *)malloc(sizeof(struct Stack));
+	init_stack(stack);
+	push(stack, tree-&gt;root);
+	struct Node * tmp;
+	while(!isEmpty(stack)){
+		tmp = pop(stack);
+		printf(&quot;%d &quot;, tmp-&gt;data);
+		if(tmp-&gt;right_child)
+			push(stack, tmp-&gt;right_child);
+		if(tmp-&gt;left_child)
+			push(stack, tmp-&gt;left_child);
+	}
+	printf(&quot;\n&quot;);
+}
+</code></pre>
+<h3 id="2-post_order-traversal">2. Post_Order traversal</h3>
+<ol>
+<li>
+<p>push the root node to stack;</p>
+</li>
+<li>
+<p>if the stack is not empty, get the top element of stack(<font color=red><strong>not pop</strong></font>);</br>
+(1) if it's left child node has been visited or null and right child node has been visited or null, pop the top element of stack and print.</br>
+(2) if it's right child node is not null and unvisited, push it into the stack and set it as visited;</br>
+(3) if it's left child node is not null and unvisited, push it into the stack and set it as visited;</br></p>
+</li>
+<li>
+<p>repeat step 2 until stack is empty</p>
+</li>
+</ol>
+<p>pseudocode in C:</p>
+<pre><code>void post_order(struct Tree * tree){
+	struct Stack * stack = (struct Stack *)malloc(sizeof(struct Stack));
+	init_stack(stack);
+	struct Node * tmp;
+	push(stack ,tree-&gt;root);
+	while(!isEmpty(stack)){
+		tmp = get_top(stack);
+		if(tmp-&gt;left_child == NULL || tmp-&gt;left_child-&gt;visited == 1) &amp;&amp; (tmp-&gt;right_child == NULL || tmp-&gt;right-&gt;visited == 1){
+			tmp = pop(stack);
+			printf(&quot;%d &quot;, tmp-&gt;data);
+		}
+		if(tmp-&gt;right_child &amp;&amp; tmp-&gt;right_child-&gt;visited == 0){
+			push(stack, tmp-&gt;right_child);
+			tmp-&gt;right_child-&gt;visited = 1;
+		}
+		if(tmp-&gt;left_child &amp;&amp; tmp-&gt;left_child-&gt;visited == 0){
+			push(stack, tmp-&gt;left_child);
+			tmp-&gt;left_child-&gt;visited = 1;
+		}
+	}
+	printf(&quot;\n&quot;);
+}
+</code></pre>
+<h3 id="3-in-order-traversal">3. In-Order traversal</h3>
+<ol>
+<li>
+<p>set it'visited equals to 1 push the root node to stack;</p>
+</li>
+<li>
+<p>if the stack is not empty, get the top element of stack(<font color=red><strong>not pop</strong></font>)</br>
+(1) if it's visited equals to 2, pop the top element of stack and print. continue</br>
+(2) if it's left child and right child are all null, pop the top element of tack and print; continue</br></p>
+<p>(3) pop itself from top of stack;</br>
+(4) if it's right child node is not null, set visited as 1 and push it into stack;</br>
+(5) set visited as 2 push itself into stack;</br>
+(6) if it's left child node is not null, set visited as 1 push it into stack;</br></p>
+</li>
+<li>
+<p>repeat step 2 until stack is empty</p>
+</li>
+</ol>
+<p>pseudocode in C:</p>
+<pre><code>void in_order(struct Tree * tree){
+	struct Stack * stack = (struct Stack *)malloc(sizeof(struct Stack));
+	init_stack(stack);
+	tree-&gt;root-&gt;visited = 1;
+	push(stack, tree-&gt;root);
+	struct Node * tmp
+	while(!isEmpty(stack)){
+		tmp = get(stack);
+		if(tmp-&gt;visited == 2){
+			tmp = pop(stack);
+			printf(&quot;%d &quot;, tmp-&gt;data);
+			continue;
+		}
+		if(tmp-&gt;left_child == NULL &amp;&amp; tmp-&gt;right_child == NULL){
+			tmp = pop(stack);
+			printf(&quot;%d &quot;, tmp-&gt;data);
+			continue;
+		}
+		tmp = pop(stack);
+		if(tmp-&gt;right_child){
+			tmp-&gt;right_child-&gt;visited = 1;
+			push(stack, tmp-&gt;right_child);
+		}
+		tmp-&gt;visited = 2;
+		push(stack, tmp);
+		if(tmp-&gt;left_child){
+			tmp-&gt;left_child-&gt;visited = 1;
+			push(stack, tmp-&gt;left_child);
+		}
+	}
+	printf(&quot;\n&quot;);
+}
+		
+</code></pre>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://raphael95.github.io/output/post/pattern-search">
+                  <h3 class="post-title">
+                    Pattern  Search
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+              
+                <div id="gitalk-container" data-aos="fade-in"></div>
+              
+
+              
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'd428067266924907dc0b',
+        clientSecret: '0f925e73ae19595836304e7a7029fefa70e5222e',
+        repo: 'Raphael95.github.io',
+        owner: 'Raphael95',
+        admin: ['Raphael95'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>
